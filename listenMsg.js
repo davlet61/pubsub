@@ -10,11 +10,9 @@ config();
 const subscriptionNameOrId = process.env.PUB_SUB_SUBSCRIPTION_ID;
 const timeout = 60;
 
-// Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
 function listenForMessages() {
-  // References an existing subscription
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Create an event handler to handle messages
@@ -25,7 +23,6 @@ function listenForMessages() {
     console.log(`\tAttributes: ${message.attributes}`);
     messageCount += 1;
 
-    // "Ack" (acknowledge receipt of) the message
     message.ack();
   };
 

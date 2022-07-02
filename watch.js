@@ -4,14 +4,13 @@ import { authenticate } from '@google-cloud/local-auth';
 
 const gmail = google.gmail('v1');
 
-async function runSample() {
-  // Obtain user credentials to use for the request
+const watchLabel = async () => {
   const auth = await authenticate({
     keyfilePath: '/home/dovlat/auth-key.json',
     scopes: [
       'https://mail.google.com/',
       'https://www.googleapis.com/auth/gmail.metadata',
-      'https://www.googleapis.com/auth/gmail.lables',
+      'https://www.googleapis.com/auth/gmail.labels',
       'https://www.googleapis.com/auth/gmail.readonly',
     ],
   });
@@ -21,13 +20,13 @@ async function runSample() {
     userId: 'me',
     requestBody: {
       topicName: 'projects/suitecrm-calendar-331322/topics/arbeidsseddel',
-      labelIds: ['INBOX'],
+      labelIds: ['Label_4847903479894356930'],
     },
   });
   console.log(res.data);
   return res.data;
-}
+};
 
-runSample().catch(console.error);
+watchLabel().catch(console.error);
 
-export default runSample;
+export default watchLabel;
